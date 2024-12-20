@@ -38,9 +38,6 @@ spring:
       mode: always
       encoding: UTF-8
 
-
-
-
 # 유레카 설정
 eureka:
   instance:
@@ -53,7 +50,6 @@ logging:
   level:
     root: INFO
     com.zaxxer.hikari.pool.HikariPool: INFO
-    com.example.catalogservice: DEBUG
     org:
       springframework:
         boot:

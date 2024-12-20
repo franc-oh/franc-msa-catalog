@@ -28,7 +28,7 @@ public class CatalogController {
 
     @GetMapping("/health_check")
     public ApiResponse<?> status(HttpServletRequest request) throws Exception {
-        return ApiResponse.ok("User Service Ok! - port="+request.getServerPort());
+        return ApiResponse.ok("Catalog Service Ok! - port="+request.getServerPort());
     }
 
     /**
