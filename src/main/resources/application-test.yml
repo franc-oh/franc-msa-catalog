@@ -1,0 +1,67 @@
+server:
+  port: 0
+
+spring:
+  config:
+    activate:
+      on-profile: "test"
+  # DB 설정
+  datasource:
+    hikari:
+      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      jdbc-url: jdbc:log4jdbc:h2:mem:catalogdb;MODE=MySQL;DB_CLOSE_DELAY=-1
+      username: catalog
+      password: catalog1234
+  # Hibernate 설정
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+  # h2 DB 설정
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: true
+  sql:
+    init:
+      #schema-locations: classpath:init-data/schema.sql
+      data-locations: classpath:init-data/data.sql
+      username: catalog
+      password: catalog1234
+      mode: always
+      encoding: UTF-8
+
+
+
+
+# 유레카 설정
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
+  client:
+    service-url:
+      defaultZone: http://localhost:8760/franc/discovery/eureka #Eureka Server 명시
+
+logging:
+  level:
+    root: INFO
+    com.zaxxer.hikari.pool.HikariPool: INFO
+    com.example.catalogservice: DEBUG
+    org:
+      springframework:
+        boot:
+          autoconfigure: ERROR
+    jdbc:
+      sqlonly: OFF
+      sqltiming: INFO
+      resultsettable: INFO
+      audit: OFF
+      resultset: OFF
+      connection: OFF
